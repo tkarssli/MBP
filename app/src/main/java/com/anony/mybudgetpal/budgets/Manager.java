@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.anony.mybudgetpal.Application;
+import com.anony.mybudgetpal.db.BudgetsDatabase;
 
 import java.lang.ref.WeakReference;
 import java.text.ParseException;
@@ -74,10 +75,26 @@ abstract class Manager<Type> {
         return obj;
     }
 
-    protected void _add(Type obj){
+    /**
+     * Adds a new item to the database and in-memory cache.
+     *
+     * @param obj The object to insert into the database.
+     *
+     * @return The new Id for the item.
+     */
+    protected int _add(Type obj){
+        // Get the content that will be inserted.
+        ContentValues contentValues = _getContentValues(obj);
+
+        // Insert the item into the database.
         SQLiteDatabase db = Application.getInstance().getBudgetsDB().getWritableDatabase();
-        ContentValues vals = _getContentValues(db);
-        db.insert(m_tableName, null, vals);
+        int id = (int)db.insert(m_tableName, null, contentValues);
+
+        // Add the item to our cache too.
+        m_cache.put(id, new WeakReference<Type>(obj));
+
+        // Return the new Id of the item.
+        return id;
     }
 
     /**
@@ -108,7 +125,7 @@ abstract class Manager<Type> {
 
         // Check for the item in the cache.
         res.moveToFirst();
-        int id = res.getInt(res.getColumnIndexOrThrow(m_idColumnName));
+        int id = res.getInt(res.getColumnIndexOrThrow(m_columnNames[0]));
         Type obj = _getFromCache(id);
 
         // If we don't have a cached instance, load it from the results we got.
@@ -131,7 +148,7 @@ abstract class Manager<Type> {
      */
     protected List<Type> _queryDatabaseForList(String selection, String[] selectionArgs){
         // Pull out the info from the DB.
-        Cursor res = _performDatabaseQuery(selection, selectionArgs)
+        Cursor res = _performDatabaseQuery(selection, selectionArgs);
         if (res.getCount() == 0){
             throw new RuntimeException("Could not find the desired item.");
         }
@@ -140,7 +157,7 @@ abstract class Manager<Type> {
         res.moveToFirst();
         List<Type> list = new LinkedList<Type>();
         do {
-            int id = res.getInt(res.getColumnIndexOrThrow(m_idColumnName));
+            int id = res.getInt(res.getColumnIndexOrThrow(m_columnNames[0]));
             Type obj = _getFromCache(id);
             if (obj == null){
                 obj = _loadFromDB(res);
@@ -152,6 +169,14 @@ abstract class Manager<Type> {
         return list;
     }
 
+    /**
+     * Performs a query against the database.
+     *
+     * @param selection     The WHERE clause for the query.
+     * @param selectionArgs Any substitution values for the WHERE clause.
+     *
+     * @return The results of the query.
+     */
     private Cursor _performDatabaseQuery(String selection, String[] selectionArgs){
         SQLiteDatabase db = Application.getInstance().getBudgetsDB().getReadableDatabase();
         return db.query(m_tableName, m_columnNames, selection, selectionArgs, null, null, null);
@@ -165,4 +190,6 @@ abstract class Manager<Type> {
      * @return An instance of Type loaded from the given data.
      */
     protected abstract Type _loadFromDB(Cursor row);
+
+    protected abstract ContentValues _getContentValues(Type obj);
 }

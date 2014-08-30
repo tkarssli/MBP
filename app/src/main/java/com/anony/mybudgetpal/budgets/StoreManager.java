@@ -1,11 +1,9 @@
 package com.anony.mybudgetpal.budgets;
 
+import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.anony.mybudgetpal.db.BudgetsContract.Stores;
-
-import java.text.ParseException;
 
 /**
  * Created by Natalie on 8/27/2014.
@@ -14,7 +12,10 @@ public class StoreManager extends Manager<Store> {
     private static StoreManager s_instance = null;
 
     private StoreManager(){
-        super(Stores.COLUMN_NAME_STORE_ID);
+        super(Stores.TABLE_NAME, new String[]{
+            Stores.COLUMN_NAME_STORE_ID,
+            Stores.COLUMN_NAME_NAME
+        });
     }
 
     public static StoreManager getInstance(){
@@ -37,22 +38,10 @@ public class StoreManager extends Manager<Store> {
     }
 
     @Override
-    protected Cursor _performDatabaseQuery(SQLiteDatabase db, String selection, String[] selectionArgs) {
-        // Assemble a list of columns to fetch.
-        String[] columns = new String[]{
-            Stores.COLUMN_NAME_STORE_ID,
-            Stores.COLUMN_NAME_NAME
-        };
-
-        // Perform the query.
-        return db.query(
-                Stores.TABLE_NAME,
-                columns,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-        );
+    protected ContentValues _getContentValues(Store store) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Stores.COLUMN_NAME_STORE_ID,  store.getId());
+        contentValues.put(Stores.COLUMN_NAME_NAME,      store.getName());
+        return contentValues;
     }
 }

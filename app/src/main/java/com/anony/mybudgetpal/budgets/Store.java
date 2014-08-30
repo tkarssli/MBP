@@ -11,4 +11,12 @@ public class Store {
         m_id = id;
         m_name = name;
     }
+
+    public int getId(){
+        return m_id;
+    }
+
+    public String getName(){
+        return m_name;
+    }
 }

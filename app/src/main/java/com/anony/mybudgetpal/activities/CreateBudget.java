@@ -1,27 +1,32 @@
 package com.anony.mybudgetpal.activities;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import com.anony.mybudgetpal.R;
+import com.anony.mybudgetpal.budgets.Budget;
+import com.anony.mybudgetpal.budgets.BudgetManager;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class CreateBudget extends Activity {
+    ArrayAdapter<Budget> m_budgetsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_budget);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new EnterAmountFragment())
-                    .commit();
-        }
+
+        m_budgetsList = new ArrayAdapter<Budget>(this, R.layout.list_budgets);
+        ListView budgetListView = (ListView)findViewById(R.id.budgetList);
+        budgetListView.setAdapter(m_budgetsList);
     }
 
     @Override
@@ -43,19 +48,20 @@ public class CreateBudget extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class EnterAmountFragment extends Fragment {
+    public void onCreateBudgetClicked(View view){
+        // Calculate the budget's daily limit.
+        int days = Integer.valueOf(((EditText)findViewById(R.id.durationCount)).getText().toString()) * 7;
+        int dailyLimit = (int)(Double.valueOf(((EditText)findViewById(R.id.amount)).getText().toString()) * 100.0 / (double)days);
 
-        public EnterAmountFragment() {
-        }
+        // Calculate the start and end date of the budget.
+        Date startDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(startDate);
+        cal.add(Calendar.DATE, days);
+        Date endDate = cal.getTime();
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_enter_amount, container, false);
-            return rootView;
-        }
+        // Create the budget and add it to our list.
+        Budget budget = BudgetManager.getInstance().addBudget(dailyLimit, startDate, endDate);
+        m_budgetsList.add(budget);
     }
 }

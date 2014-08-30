@@ -1,20 +1,21 @@
 package com.anony.mybudgetpal;
 
 import com.anony.mybudgetpal.budgets.BudgetManager;
-import com.anony.mybudgetpal.db.BudgetsHelper;
+import com.anony.mybudgetpal.db.BudgetsDatabase;
 
 /**
  * Created by Natalie on 8/27/2014.
  */
 public class Application extends android.app.Application {
     private static Application s_instance = null;
-    private BudgetsHelper m_budgetsDB = new BudgetsHelper(getApplicationContext());
+    private BudgetsDatabase m_budgetsDB = null;
 
-    Application(){
+    public Application(){
         super();
 
         // Initialize all the singletons.
         s_instance = this;
+        m_budgetsDB = new BudgetsDatabase(this);
         BudgetManager.getInstance();
     }
 
@@ -22,7 +23,7 @@ public class Application extends android.app.Application {
         return s_instance;
     }
 
-    public BudgetsHelper getBudgetsDB(){
+    public BudgetsDatabase getBudgetsDB(){
         return m_budgetsDB;
     }
 }

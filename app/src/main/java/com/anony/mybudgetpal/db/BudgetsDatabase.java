@@ -4,14 +4,16 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.anony.mybudgetpal.Application;
+
 /**
  * Created by Natalie on 8/27/2014.
  */
-public class BudgetsHelper extends SQLiteOpenHelper {
+public class BudgetsDatabase extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION   = 1;
     private static final String FILE_NAME       = "budgets.db";
 
-    public BudgetsHelper(Context context) {
+    public BudgetsDatabase(Context context) {
         super(context, FILE_NAME, null, DATABASE_VERSION);
     }
 

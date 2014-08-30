@@ -21,6 +21,17 @@ public class Budget {
         m_end           = end;
     }
 
+    public Budget(int dailyLimit, Date startDate, Date endDate) {
+        m_id            = 0;
+        m_dailyLimit    = dailyLimit;
+        m_start         = startDate;
+        m_end           = endDate;
+    }
+
+    protected void setId(int id){
+        m_id = id;
+    }
+
     public void addExpense(Expense expense){
         expense.setBudget(this);
         m_expenses.add(expense);
@@ -80,5 +91,10 @@ public class Budget {
         cal.set(Calendar.MILLISECOND, 0);
 
         return cal.getTime();
+    }
+
+    @Override
+    public String toString(){
+        return "$" + String.valueOf(m_dailyLimit / 100) + " - " + m_start.toString() + " : " + m_end.toString();
     }
 }

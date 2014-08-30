@@ -1,7 +1,7 @@
 package com.anony.mybudgetpal.budgets;
 
+import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.anony.mybudgetpal.db.BudgetsContract.Expenses;
 
@@ -15,7 +15,13 @@ public class ExpenseManager extends Manager<Expense> {
     private static ExpenseManager s_instance = null;
 
     private ExpenseManager(){
-        super(Expenses.COLUMN_NAME_EXPENSE_ID);
+        super(Expenses.TABLE_NAME, new String[]{
+            Expenses.COLUMN_NAME_EXPENSE_ID,
+            Expenses.COLUMN_NAME_BUDGET_ID,
+            Expenses.COLUMN_NAME_STORE_ID,
+            Expenses.COLUMN_NAME_PURCHASE_DATE,
+            Expenses.COLUMN_NAME_COST
+        });
     }
 
     public static ExpenseManager getInstance(){
@@ -56,22 +62,12 @@ public class ExpenseManager extends Manager<Expense> {
     }
 
     @Override
-    protected Cursor _performDatabaseQuery(SQLiteDatabase db, String selection, String[] selectionArgs) {
-        String[] columns = new String[]{
-            Expenses.COLUMN_NAME_EXPENSE_ID,
-            Expenses.COLUMN_NAME_BUDGET_ID,
-            Expenses.COLUMN_NAME_STORE_ID,
-            Expenses.COLUMN_NAME_PURCHASE_DATE,
-            Expenses.COLUMN_NAME_COST
-        };
-        return db.query(
-                Expenses.TABLE_NAME,
-                columns,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-        );
+    protected ContentValues _getContentValues(Expense expense) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Expenses.COLUMN_NAME_BUDGET_ID,       expense.getBudget().getId());
+        contentValues.put(Expenses.COLUMN_NAME_STORE_ID,        expense.getStore().getId());
+        contentValues.put(Expenses.COLUMN_NAME_PURCHASE_DATE,   _formatDate(expense.getDate()));
+        contentValues.put(Expenses.COLUMN_NAME_COST,            expense.getCost());
+        return contentValues;
     }
 }
