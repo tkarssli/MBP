@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/budgetListItem_amountWrapper">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="$"
+            android:id="@+id/budgetListItem_currency"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Budget Daily Limit"
+            android:id="@+id/budgetListItem_dailyLimit"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/budgetListItem_currency"
+            android:layout_toEndOf="@+id/budgetListItem_currency"
+            android:gravity="center_vertical" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Start Date"
+        android:id="@+id/budgetListItem_startDateView"
+        android:layout_below="@+id/budgetListItem_amountWrapper"
+        android:layout_alignLeft="@+id/budgetListItem_amountWrapper"
+        android:layout_alignStart="@+id/budgetListItem_amountWrapper" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="End Date"
+        android:id="@+id/budgetListItem_endDateView"
+        android:layout_below="@+id/budgetListItem_amountWrapper"
+        android:layout_alignRight="@+id/budgetListItem_amountWrapper"
+        android:layout_alignEnd="@+id/budgetListItem_amountWrapper" />
+
+</merge>

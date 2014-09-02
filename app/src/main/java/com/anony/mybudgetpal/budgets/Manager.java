@@ -5,16 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.anony.mybudgetpal.Application;
-import com.anony.mybudgetpal.db.BudgetsDatabase;
+import com.anony.mybudgetpal.util.Formatter;
 
 import java.lang.ref.WeakReference;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.TreeMap;
 
 /**
@@ -24,10 +22,8 @@ abstract class Manager<Type> {
     private Map<Integer, WeakReference<Type>> m_cache = new TreeMap<Integer, WeakReference<Type>>();
     private String m_tableName;
     private String[] m_columnNames;
-    private SimpleDateFormat m_dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     protected Manager(String tableName, String[] columnNames){
-        m_dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         m_tableName = tableName;
         m_columnNames = columnNames;
     }
@@ -42,7 +38,7 @@ abstract class Manager<Type> {
      * @return The parsed date.
      */
     protected Date _parseDateString(String dateString) throws ParseException {
-        return m_dateFormat.parse(dateString);
+        return Formatter.getInstance().parseDate(dateString);
     }
 
     /**
@@ -53,7 +49,7 @@ abstract class Manager<Type> {
      * @return The formatted date string.
      */
     protected String _formatDate(Date date){
-        return m_dateFormat.format(date);
+        return Formatter.getInstance().format(date);
     }
 
     /**

@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.anony.mybudgetpal.R;
 import com.anony.mybudgetpal.budgets.Budget;
 import com.anony.mybudgetpal.budgets.BudgetManager;
+import com.anony.mybudgetpal.ui.adapter.BudgetAdapter;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class CreateBudget extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_budget);
 
-        m_budgetsList = new ArrayAdapter<Budget>(this, R.layout.list_budgets);
+        m_budgetsList = new BudgetAdapter(this);
         ListView budgetListView = (ListView)findViewById(R.id.budgetList);
         budgetListView.setAdapter(m_budgetsList);
     }
