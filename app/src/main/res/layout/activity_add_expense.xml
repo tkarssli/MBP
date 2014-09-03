@@ -24,4 +24,14 @@
         app:label="Price"
         app:type="number" />
 
+    <com.anony.mybudgetpal.ui.ButtonView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addExpense_submitButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="true"
+        android:text="Add Expense"
+        android:onClick="onSubmitButtonClicked"/>
+
 </RelativeLayout>

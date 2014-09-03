@@ -6,6 +6,7 @@ import android.database.Cursor;
 import com.anony.mybudgetpal.db.BudgetsContract.Expenses;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class ExpenseManager extends Manager<Expense> {
             Expenses.COLUMN_NAME_EXPENSE_ID,
             Expenses.COLUMN_NAME_BUDGET_ID,
             Expenses.COLUMN_NAME_STORE_ID,
+            Expenses.COLUMN_NAME_NAME,
             Expenses.COLUMN_NAME_PURCHASE_DATE,
             Expenses.COLUMN_NAME_COST
         });
@@ -29,6 +31,21 @@ public class ExpenseManager extends Manager<Expense> {
             s_instance = new ExpenseManager();
         }
         return s_instance;
+    }
+
+    /**
+     * Factory method for creating new expenses and saving them to the database in one fell swoop.
+     *
+     * @param name The name of the new expense.
+     * @param cost The cost of the expense, in pennies.
+     * @param date The date the expense is for.
+     *
+     * @return The new expense.
+     */
+    public Expense createExpense(String name, int cost, Date date){
+        Expense expense = new Expense(name, cost, date);
+        addExpense(expense);
+        return expense;
     }
 
     public List<Expense> getExpenses(Budget budget){
@@ -52,6 +69,7 @@ public class ExpenseManager extends Manager<Expense> {
                     row.getInt(row.getColumnIndexOrThrow(Expenses.COLUMN_NAME_EXPENSE_ID)),
                     BudgetManager.getInstance().getBudget(row.getInt(row.getColumnIndexOrThrow(Expenses.COLUMN_NAME_BUDGET_ID))),
                     StoreManager.getInstance().getStore(row.getInt(row.getColumnIndexOrThrow(Expenses.COLUMN_NAME_STORE_ID))),
+                    row.getString(row.getColumnIndexOrThrow(Expenses.COLUMN_NAME_NAME)),
                     row.getInt(row.getColumnIndexOrThrow(Expenses.COLUMN_NAME_COST)),
                     _parseDateString(row.getString(row.getColumnIndexOrThrow(Expenses.COLUMN_NAME_PURCHASE_DATE)))
             );
@@ -64,8 +82,11 @@ public class ExpenseManager extends Manager<Expense> {
     @Override
     protected ContentValues _getContentValues(Expense expense) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Expenses.COLUMN_NAME_BUDGET_ID,       expense.getBudget().getId());
-        contentValues.put(Expenses.COLUMN_NAME_STORE_ID,        expense.getStore().getId());
+        Budget  budget  = expense.getBudget();
+        Store   store   = expense.getStore();
+        contentValues.put(Expenses.COLUMN_NAME_BUDGET_ID,       budget == null  ? null : budget.getId());
+        contentValues.put(Expenses.COLUMN_NAME_STORE_ID,        store == null   ? null : store.getId());
+        contentValues.put(Expenses.COLUMN_NAME_NAME,            expense.getName());
         contentValues.put(Expenses.COLUMN_NAME_PURCHASE_DATE,   _formatDate(expense.getDate()));
         contentValues.put(Expenses.COLUMN_NAME_COST,            expense.getCost());
         return contentValues;

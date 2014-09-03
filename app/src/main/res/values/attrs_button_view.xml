@@ -1,0 +1,4 @@
+<resources>
+    <declare-styleable name="ButtonView">
+    </declare-styleable>
+</resources>

@@ -3,14 +3,8 @@ package com.anony.mybudgetpal.ui;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.text.InputType;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,14 +49,14 @@ public class LabeledTextView extends RelativeLayout {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
-        // Load attributes
-        final TypedArray a = getContext().obtainStyledAttributes(
-                attrs, R.styleable.LabeledTextView, defStyle, 0);
-
         // Get the views we care about from the layout.
         LayoutInflater.from(context).inflate(R.layout.view_labeled_text_children, this, true);
         TextView labelView = (TextView)findViewById(R.id.labeledText_label);
         m_textView  = (EditText)findViewById(R.id.labeledText_input);
+
+        // Load attributes
+        final TypedArray a = getContext().obtainStyledAttributes(
+                attrs, R.styleable.LabeledTextView, defStyle, 0);
 
         // Set the keyboard input style.
         int inputType = a.getInt(R.styleable.LabeledTextView_type, InputType.STRING.getCode());
@@ -78,6 +72,8 @@ public class LabeledTextView extends RelativeLayout {
 
         // Set the view's label.
         labelView.setText(a.getString(R.styleable.LabeledTextView_label));
+
+        a.recycle();
     }
 
     @Override

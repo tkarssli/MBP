@@ -4,7 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
 import com.anony.mybudgetpal.R;
+import com.anony.mybudgetpal.budgets.ExpenseManager;
+import com.anony.mybudgetpal.ui.LabeledTextView;
+
+import java.util.Date;
 
 public class AddExpense extends Activity {
 
@@ -13,7 +19,6 @@ public class AddExpense extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,5 +37,15 @@ public class AddExpense extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSubmitButtonClicked(View view) {
+        // Create a new expense.
+        String name = ((LabeledTextView)findViewById(R.id.addExpense_nameInput)).getText();
+        int amount = (int)(((LabeledTextView)findViewById(R.id.addExpense_priceInput)).getDouble() * 100.0);
+        Date date = new Date();
+        ExpenseManager.getInstance().createExpense(name, amount, date);
+
+        // TODO Now would be a good time to change to the expense list page. :)
     }
 }

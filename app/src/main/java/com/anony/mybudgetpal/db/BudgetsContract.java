@@ -25,6 +25,7 @@ public final class BudgetsContract {
         public static final String COLUMN_NAME_EXPENSE_ID       = Expenses._ID;
         public static final String COLUMN_NAME_BUDGET_ID        = "budgetId";
         public static final String COLUMN_NAME_STORE_ID         = "storeId";
+        public static final String COLUMN_NAME_NAME             = "expenseName";
         public static final String COLUMN_NAME_PURCHASE_DATE    = "purchaseDate";
         public static final String COLUMN_NAME_COST             = "cost";
     }
@@ -57,6 +58,7 @@ public final class BudgetsContract {
             Expenses.COLUMN_NAME_EXPENSE_ID     + _PRIMARY_KEY  + ", " +
             Expenses.COLUMN_NAME_BUDGET_ID      + _FOREIGN_ID   + Budgets.TABLE_NAME    + "(" + Budgets.COLUMN_NAME_BUDGET_ID   + "), " +
             Expenses.COLUMN_NAME_STORE_ID       + _FOREIGN_ID   + Stores.TABLE_NAME     + "(" + Stores.COLUMN_NAME_STORE_ID     + "), " +
+            Expenses.COLUMN_NAME_NAME           + _TEXT         + ", " +
             Expenses.COLUMN_NAME_PURCHASE_DATE  + _DATE_TIME    + ", " +
             Expenses.COLUMN_NAME_COST           + _CURRENCY     +
         ");";
