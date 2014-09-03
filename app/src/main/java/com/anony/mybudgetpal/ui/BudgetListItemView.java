@@ -38,7 +38,7 @@ public class BudgetListItemView extends RelativeLayout {
     }
 
     public static BudgetListItemView inflate(ViewGroup parent){
-        return (BudgetListItemView)LayoutInflater.from(parent.getContext()).inflate(R.layout.budget_list_item_view, parent, false);
+        return (BudgetListItemView)LayoutInflater.from(parent.getContext()).inflate(R.layout.sample_budget_list_item, parent, false);
     }
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
@@ -50,7 +50,7 @@ public class BudgetListItemView extends RelativeLayout {
             0
         );
 
-        LayoutInflater.from(context).inflate(R.layout.budget_list_item_view_children, this, true);
+        LayoutInflater.from(context).inflate(R.layout.view_budget_list_item_children, this, true);
         _setUpChildren();
     }
 
