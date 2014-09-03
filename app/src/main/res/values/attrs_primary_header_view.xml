@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="PrimaryHeaderView">
+        <attr name="title"          format="string" />
+        <attr name="showHamburger"  format="boolean" />
+        <attr name="showSettings"   format="boolean" />
+    </declare-styleable>
+</resources>
