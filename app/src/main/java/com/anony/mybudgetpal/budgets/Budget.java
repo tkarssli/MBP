@@ -62,8 +62,22 @@ public class Budget {
         return m_id;
     }
 
+    /**
+     * Fetches the daily limit for the budget.
+     *
+     * @return The daily spending limit, in pennies.
+     */
     public int getDailyLimit(){
         return m_dailyLimit;
+    }
+
+    /**
+     * Fetches the daily limit for the budget in dollars.
+     *
+     * @return The daily spending limit, in dollars.
+     */
+    public double getRealDailyLimit(){
+        return ((double)getDailyLimit()) / 100.0;
     }
 
     public Date getStartDate(){
@@ -82,8 +96,16 @@ public class Budget {
         return m_expenses;
     }
 
-    public int getRemainingBudget( Date date ) throws RuntimeException {
+    /**
+     * Calculates how much of the budget remains for the given date.
+     *
+     * @param date The date to calculate the budget for.
+     *
+     * @return The remaining budget for the given date in pennies.
+     */
+    public int getRemainingBudget( Date date ){
         if( date.before( m_start ) || date.after( m_end ) ){
+            // TODO: Make a real exception class to throw here.
             throw new RuntimeException( "Date is out of this budget's range" );
         }
 
@@ -95,6 +117,17 @@ public class Budget {
         }
 
         return remainingBudget;
+    }
+
+    /**
+     * Calculates the remaining budget in dollars.
+     *
+     * @param date The date to calculate the budget for.
+     *
+     * @return The remaining budget for the given date in dollars.
+     */
+    public double getRealRemainingBudget(Date date){
+        return ((double)getRemainingBudget(date)) / 100.0;
     }
 
     private boolean _datesEqual( Date a, Date b ){
@@ -111,10 +144,5 @@ public class Budget {
         cal.set(Calendar.MILLISECOND, 0);
 
         return cal.getTime();
-    }
-
-    @Override
-    public String toString(){
-        return "$" + String.valueOf(m_dailyLimit / 100) + " - " + m_start.toString() + " : " + m_end.toString();
     }
 }
