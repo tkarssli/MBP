@@ -61,9 +61,8 @@ public abstract class SubHeaderView extends RelativeLayout {
         return m_isCollapsed;
     }
 
-    protected void setContent(View view){
-        m_contentWrapper.removeAllViews();
-        m_contentWrapper.addView(view);
+    protected FrameLayout getContentContainer(){
+        return m_contentWrapper;
     }
 
     @Override

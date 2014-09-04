@@ -12,6 +12,11 @@
         app:title="Add Expense"
         app:showSettings="false" />
 
+    <com.anony.mybudgetpal.ui.BudgetSubHeaderView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:defaultState="collapsed" />
+    
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
