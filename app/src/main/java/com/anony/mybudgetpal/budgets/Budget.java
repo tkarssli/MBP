@@ -14,20 +14,55 @@ public class Budget {
     private Date m_end;
     private List<Expense> m_expenses = null;
 
-    Budget( int id, int dailyLimit, Date start, Date end ){
+    /**
+     * Interface to be used by listeners for the budget changed event.
+     *
+     * A budget can change when its start or end date is modified, an expense is added or removed,
+     * or the daily limit is adjusted.
+     */
+    public interface OnChangeListener {
+        /**
+         * Called when the budget changes.
+         *
+         * @param budget The budget which changed.
+         */
+        void onChanged(Budget budget);
+    }
+
+    /**
+     * Constructor for loading budgets from the database.
+     *
+     * @param id            The Id of the budget.
+     * @param dailyLimit    The daily limit of the budget.
+     * @param start         The starting date of the budget.
+     * @param end           The end date for the budget.
+     */
+    protected Budget( int id, int dailyLimit, Date start, Date end ){
         m_id            = id;
         m_dailyLimit    = dailyLimit;
         m_start         = start;
         m_end           = end;
     }
 
-    public Budget(int dailyLimit, Date startDate, Date endDate) {
+    /**
+     * Constructor for creating new budgets.
+     *
+     * @param dailyLimit    The daily limit for spending.
+     * @param startDate     The date this budget starts.
+     * @param endDate       The date the budget ends.
+     */
+    protected Budget(int dailyLimit, Date startDate, Date endDate) {
         m_id            = 0;
         m_dailyLimit    = dailyLimit;
         m_start         = startDate;
         m_end           = endDate;
     }
 
+    /**
+     * Sets the Id for this budget. Only used when creating a new budget.
+     *
+     * @param id The Id of the budget.
+     */
     protected void setId(int id){
         m_id = id;
     }
