@@ -3,35 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.anony.mybudgetpal.activities.AddExpense">
 
-    <com.anony.mybudgetpal.ui.LabeledTextView
+    <com.anony.mybudgetpal.ui.PrimaryHeaderView
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:id="@+id/addExpense_primaryHeader"
+        app:title="Add Expense"
+        app:showSettings="false" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/addExpense_nameInput"
-        app:label="Name"
-        app:type="string" />
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_below="@+id/addExpense_primaryHeader">
 
-    <com.anony.mybudgetpal.ui.LabeledTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/addExpense_priceInput"
-        android:layout_below="@+id/addExpense_nameInput"
-        app:label="Price"
-        app:type="number" />
+        <com.anony.mybudgetpal.ui.LabeledTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addExpense_nameInput"
+            app:label="Name"
+            app:type="string" />
 
-    <com.anony.mybudgetpal.ui.ButtonView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/addExpense_submitButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textAllCaps="true"
-        android:text="Add Expense"
-        android:onClick="onSubmitButtonClicked"/>
+        <com.anony.mybudgetpal.ui.LabeledTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addExpense_priceInput"
+            android:layout_below="@+id/addExpense_nameInput"
+            app:label="Price"
+            app:type="number" />
+
+        <com.anony.mybudgetpal.ui.ButtonView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addExpense_submitButton"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textAllCaps="true"
+            android:text="Add Expense"
+            android:onClick="onSubmitButtonClicked"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
