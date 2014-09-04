@@ -15,21 +15,6 @@ public class Budget {
     private List<Expense> m_expenses = null;
 
     /**
-     * Interface to be used by listeners for the budget changed event.
-     *
-     * A budget can change when its start or end date is modified, an expense is added or removed,
-     * or the daily limit is adjusted.
-     */
-    public interface OnChangeListener {
-        /**
-         * Called when the budget changes.
-         *
-         * @param budget The budget which changed.
-         */
-        void onChanged(Budget budget);
-    }
-
-    /**
      * Constructor for loading budgets from the database.
      *
      * @param id            The Id of the budget.
