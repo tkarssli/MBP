@@ -69,15 +69,6 @@
             android:layout_alignEnd="@+id/durationCount"
             android:onClick="onCreateBudgetClicked" />
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/budgetList"
-            android:layout_below="@+id/createBudgetButton"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="16dp" />
-
-
     </RelativeLayout>
 
 </RelativeLayout>

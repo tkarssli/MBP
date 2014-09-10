@@ -18,16 +18,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CreateBudget extends Activity {
-    ArrayAdapter<Budget> m_budgetsList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_budget);
-
-        m_budgetsList = new BudgetAdapter(this);
-        ListView budgetListView = (ListView)findViewById(R.id.budgetList);
-        budgetListView.setAdapter(m_budgetsList);
     }
 
     @Override
@@ -63,6 +57,5 @@ public class CreateBudget extends Activity {
 
         // Create the budget and add it to our list.
         Budget budget = BudgetManager.getInstance().addBudget(dailyLimit, startDate, endDate);
-        m_budgetsList.add(budget);
     }
 }
