@@ -1,0 +1,9 @@
+<resources>
+    <declare-styleable name="SubHeaderView">
+        <attr name="collapsible" format="boolean" />
+        <attr name="defaultState" format="enum">
+            <enum name="collapsed" value="0" />
+            <enum name="expanded" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

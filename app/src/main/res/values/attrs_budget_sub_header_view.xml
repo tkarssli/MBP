@@ -1,0 +1,4 @@
+<resources>
+    <declare-styleable name="BudgetSubHeaderView">
+    </declare-styleable>
+</resources>

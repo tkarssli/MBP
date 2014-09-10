@@ -1,5 +1,8 @@
 package com.anony.mybudgetpal.util;
 
+import android.content.res.Resources;
+import android.util.TypedValue;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,5 +51,27 @@ public class Formatter {
      */
     public Date parseDate(String dateString) throws ParseException {
         return m_dateFormat.parse(dateString);
+    }
+
+    /**
+     * Converts a dp unit to device-specific pixels.
+     *
+     * @param dp The device-independent pixel count to convert.
+     *
+     * @return The number of pixels represented by the given dimension.
+     */
+    public int dpToPx(int dp){
+        return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
+    }
+
+    /**
+     * Converts a px unit to device-independent pixels.
+     *
+     * @param px The device-dependent pixel count to convert.
+     *
+     * @return The number of dp equivalent to the given dimension.
+     */
+    public int pxToDp(int px){
+        return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, px, Resources.getSystem().getDisplayMetrics());
     }
 }
