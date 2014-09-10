@@ -15,6 +15,8 @@
     <com.anony.mybudgetpal.ui.BudgetSubHeaderView
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:id="@+id/addExpense_subHeader"
+        android:layout_below="@id/addExpense_primaryHeader"
         app:defaultState="collapsed" />
     
     <RelativeLayout
@@ -24,7 +26,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:layout_below="@+id/addExpense_primaryHeader">
+        android:layout_below="@+id/addExpense_subHeader">
 
         <com.anony.mybudgetpal.ui.LabeledTextView
             android:layout_width="match_parent"

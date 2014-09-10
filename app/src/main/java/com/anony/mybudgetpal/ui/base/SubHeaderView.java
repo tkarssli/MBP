@@ -49,7 +49,13 @@ public abstract class SubHeaderView extends RelativeLayout {
 
         // Adjust the size of the header according to the requested initial state.
         m_isCollapsed = a.getInt(R.styleable.SubHeaderView_defaultState, COLLAPSED) == COLLAPSED;
-        ViewGroup.LayoutParams layoutParams = getLayoutParams();
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)getLayoutParams();
+        if (layoutParams == null) {
+            layoutParams = new RelativeLayout.LayoutParams(
+                    LayoutParams.MATCH_PARENT,
+                    LayoutParams.MATCH_PARENT
+            );
+        }
         layoutParams.width  = LayoutParams.MATCH_PARENT;
         layoutParams.height = Formatter.getInstance().dpToPx( m_isCollapsed ? 48 : 203 );
         setLayoutParams(layoutParams);

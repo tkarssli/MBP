@@ -41,10 +41,10 @@ public class BudgetSubHeaderView extends SubHeaderView {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
-        LayoutInflater.from(context).inflate(R.layout.view_budget_sub_header_children, getContentContainer(), false);
+        LayoutInflater.from(context).inflate(R.layout.view_budget_sub_header_children, getContentContainer(), true);
         m_dailyLimitContainer   = (RelativeLayout)findViewById(R.id.budgetSubHeader_dailyLimitContainer);
-        m_remainingText         = (TextView)m_dailyLimitContainer.findViewById(R.id.budgetSubHeader_remaining);
-        m_remainingBudget       = (TextView)findViewById(R.id.budgetSubHeader_remaining);
+        m_remainingText         = (TextView)findViewById(R.id.budgetSubHeader_remaining);
+        m_remainingBudget       = (TextView)findViewById(R.id.budgetSubHeader_remainder);
         m_dailyBudgetLimit      = (TextView)findViewById(R.id.budgetSubHeader_dailyLimit);
 
         _updatePositioning();
