@@ -1,9 +1,12 @@
 package com.anony.mybudgetpal.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
 import com.anony.mybudgetpal.R;
 
 public class Welcome extends Activity {
@@ -32,5 +35,10 @@ public class Welcome extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onWelcomeContinueButtonClicked(View view) {
+        Intent intent = new Intent(this, CreateBudget.class);
+        startActivity(intent);
     }
 }
