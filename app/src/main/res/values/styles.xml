@@ -1,8 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="DefaultTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/white_opaque</item>
+        <item name="android:actionBarStyle">@style/defualtActionBar</item>
+        <item name="android:textViewStyle">@style/def_textView</item>
+        <item name="android:listViewStyle">@style/def_listView</item>
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+
+        <item name="android:displayOptions">showHome|homeAsUp|showTitle</item>
+        <!--<item name="android:icon">@android:color/transparent</item> &lt;!&ndash; This does the magic! &ndash;&gt;-->
     </style>
 
+    <!-- Action Bar Styles. -->
+    <style name="defualtActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/green</item>
+
+    </style>
+
+
+     <!-- Font Styles. -->
+     <!--Layout Styles. -->
+
+    <style name="def_listView">
+        <item name = "android:background">@color/light_green</item>
+
+    </style>
+
+    <style name="def_textView">
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_vertical_margin</item>
+    </style>
+
+    <!--<style name="def_relativeLayout">-->
+        <!--<item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>-->
+        <!--<item name="android:paddingLeft">@dimen/activity_vertical_margin</item>-->
+
+    <!--</style>-->
 </resources>
