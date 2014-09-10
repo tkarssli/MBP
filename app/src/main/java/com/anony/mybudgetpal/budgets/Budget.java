@@ -55,7 +55,6 @@ public class Budget {
     public void addExpense(Expense expense){
         expense.setBudget(this);
         m_expenses.add(expense);
-        ExpenseManager.getInstance().addExpense(expense);
     }
 
     public int getId(){

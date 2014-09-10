@@ -44,7 +44,12 @@ public class ExpenseManager extends Manager<Expense> {
      */
     public Expense createExpense(String name, int cost, Date date){
         Expense expense = new Expense(name, cost, date);
-        addExpense(expense);
+        Budget budget = BudgetManager.getInstance().getBudgetForDate(date);
+        if (budget != null) {
+            budget.addExpense(expense);
+        }
+        int id = _add(expense);
+        expense.setId(id);
         return expense;
     }
 
@@ -56,10 +61,6 @@ public class ExpenseManager extends Manager<Expense> {
             budget.getEndDate() == null ? null : _formatDate(budget.getEndDate())
         };
         return _queryDatabaseForList(selection, selectionArgs);
-    }
-
-    public void addExpense(Expense expense){
-        _add(expense);
     }
 
     @Override
