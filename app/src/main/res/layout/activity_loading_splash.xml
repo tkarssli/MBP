@@ -10,15 +10,25 @@
     tools:context="com.anony.mybudgetpal.activities.LoadingSplash"
     android:onClick="onLogoClicked">
 
+    <ImageView
+        android:id="@+id/splash_image"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:paddingTop="50dp"
+        android:src="@drawable/splash_image"/>
+
     <TextView
+        android:id="@+id/loadingSplash_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="36dp"
         android:text="mybudgetpal"
-        android:id="@+id/loadingSplash_logo"
-        android:layout_marginTop="200dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/splash_image"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="25dp"
+        android:bufferType="spannable"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,5 +36,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="simple budgeting"
         android:layout_below="@+id/loadingSplash_logo"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/green"/>
 </RelativeLayout>

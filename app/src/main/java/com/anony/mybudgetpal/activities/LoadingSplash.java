@@ -2,10 +2,16 @@ package com.anony.mybudgetpal.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.anony.mybudgetpal.R;
 
@@ -15,6 +21,30 @@ public class LoadingSplash extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_splash);
+
+
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
+        // Hide Action Bar
+        getActionBar().hide();
+
+        // Set Font
+        TextView logo = (TextView)findViewById(R.id.loadingSplash_logo);
+
+        //Set Logo word colors
+        Spannable spannable = (Spannable)logo.getText();
+        ForegroundColorSpan my_span = new ForegroundColorSpan(Color.parseColor("#7CB342"));
+        ForegroundColorSpan budget_span = new ForegroundColorSpan(Color.parseColor("#558B2F"));
+        ForegroundColorSpan pal_span = new ForegroundColorSpan(Color.parseColor("#33691E"));
+
+        spannable.setSpan(my_span, 0,2,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(budget_span, 2,8,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(pal_span, 8,11,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
     }
 
 

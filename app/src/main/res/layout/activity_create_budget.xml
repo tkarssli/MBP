@@ -5,69 +5,103 @@
     android:layout_height="match_parent"
     tools:context="com.anony.mybudgetpal.activities.CreateBudget">
 
-    <com.anony.mybudgetpal.ui.PrimaryHeaderView
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:id="@+id/createBudget_primaryHeader"
-        app:title="Create Budget"
-        app:showSettings="false" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/createBudget_primaryHeader"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/durationCount"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="34dp"
+            android:text="Set a budget"
+            android:id="@+id/create_budget_title"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/dark_green"/>
+
+        <com.anony.mybudgetpal.ui.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First, how long are you budgeting for?"
+            android:id="@+id/create_budget_para1"
+            android:layout_below="@+id/create_budget_title"
+            android:alpha=".87"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/create_budget_para1"
+            android:inputType="number"
+            android:ems="4"
+            android:id="@+id/durationCount"
+            android:layout_centerHorizontal="true" />
+
+        <com.anony.mybudgetpal.ui.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Weeks"
             android:id="@+id/durationType"
             android:layout_toEndOf="@+id/durationCount"
-            android:layout_alignBaseline="@+id/durationCount" />
+            android:layout_alignBaseline="@+id/durationCount"
+            android:alpha=".87"/>
+
+        <com.anony.mybudgetpal.ui.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next, how much money do you have to spend?"
+            android:id="@+id/create_budget_para2"
+            android:layout_below="@+id/durationCount"
+            android:alpha=".87"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:ems="10"
+            android:ems="5"
             android:id="@+id/amount"
             android:layout_marginTop="16dp"
-            android:layout_below="@+id/durationCount"
-            android:layout_alignStart="@+id/durationCount" />
+            android:layout_below="@+id/create_budget_para2"
+            android:layout_centerHorizontal="true"/>
 
-        <TextView
+        <com.anony.mybudgetpal.ui.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="$"
             android:id="@+id/textView"
-            android:layout_toEndOf="@+id/amount"
-            android:layout_alignBaseline="@+id/amount" />
+            android:layout_alignBaseline="@+id/amount"
+            android:layout_toLeftOf="@id/amount"/>
+
+        <com.anony.mybudgetpal.ui.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Based on your information, you have a daily budget of"
+            android:id="@+id/create_budget_para3"
+            android:layout_below="@+id/amount"
+            android:alpha=".87"/>
+
+        <com.anony.mybudgetpal.ui.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/daily_budget"
+            android:layout_marginTop="16dp"
+            android:text="blah"
+            android:layout_toRightOf="@id/create_budget_para3"/>
+
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create Budget"
-            android:id="@+id/createBudgetButton"
-            android:layout_below="@+id/amount"
-            android:layout_alignStart="@+id/durationCount"
-            android:layout_marginTop="16dp"
-            android:layout_alignEnd="@+id/durationCount"
-            android:onClick="onCreateBudgetClicked" />
+            android:text="SAVE BUDGET"
+            android:id="@+id/create_budget_continueButton"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick=""
+            />
 
     </RelativeLayout>
 

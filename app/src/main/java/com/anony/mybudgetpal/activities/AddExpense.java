@@ -53,7 +53,7 @@ public class AddExpense extends Activity {
 
         // Setup Fonts
         TextView txt = (TextView) findViewById(R.id.title);
-        Typeface font = Typeface.createFromAsset(getAssets(), "Roboto-MediumItalic.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "Roboto-Medium.ttf");
         txt.setTypeface(font);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
